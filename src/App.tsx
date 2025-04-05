@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import RegisterForm from "./components/RegisterForm";
+import LoginForm from "./components/LoginForm";
 
-function App() {
+const App: React.FC = () => {
+  const [showRegister, setShowRegister] = useState<boolean>(true);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App-header">
+      <h1>Job Offers Application</h1>
+      {showRegister ? (
+        <>
+          <RegisterForm />
+          <p>
+            Already have an account?{" "}
+            <span
+              className="toggle-form"
+              onClick={() => setShowRegister(false)}
+            >
+              Login
+            </span>
+          </p>
+        </>
+      ) : (
+        <>
+          <LoginForm />
+          <p>
+            Don't have an account?{" "}
+            <span className="toggle-form" onClick={() => setShowRegister(true)}>
+              Register
+            </span>
+          </p>
+        </>
+      )}
     </div>
   );
-}
+};
 
 export default App;
