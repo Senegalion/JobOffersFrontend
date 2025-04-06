@@ -32,7 +32,7 @@ export const registerUser = async (username: string, password: string) => {
 
 export const loginUser = async (username: string, password: string) => {
   try {
-    const response = await axios.post<JwtResponse>(`${API_URL}/token`, {
+    const response = await axios.post(`${API_URL}/token`, {
       username,
       password,
     });
