@@ -1,11 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { loginUser } from "../api/auth";
 
-const LoginForm: React.FC = () => {
+const LoginForm: React.FC<{ setToken: (token: string) => void }> = ({
+  setToken,
+}) => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const [token, setToken] = useState<string>("");
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = (location.state as { from: string })?.from || "/offers";
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,6 +21,8 @@ const LoginForm: React.FC = () => {
       setToken(data.token);
       setUsername("");
       setPassword("");
+
+      navigate(from, { replace: true });
     } catch (err) {
       setError("Login failed. Check your credentials.");
     }
@@ -40,7 +49,6 @@ const LoginForm: React.FC = () => {
         <button type="submit">Login</button>
       </form>
       {error && <p className="error">{error}</p>}
-      {token && <p className="success">Logged in! Token: {token}</p>}
     </div>
   );
 };

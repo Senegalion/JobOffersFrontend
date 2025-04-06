@@ -75,3 +75,11 @@ p {
 .toggle-form:hover {
   color: #4caf50;
 }
+
+a {
+  color: #61dafb;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
