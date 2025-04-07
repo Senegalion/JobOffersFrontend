@@ -12,6 +12,10 @@ const OffersPage: React.FC<{ token: string }> = ({ token }) => {
         <Link to="/offers/new">Add Offer</Link>
       </nav>
 
+      <p style={{ fontStyle: "italic", color: "gray", marginBottom: 20 }}>
+        Offers are fetched automatically every 3 hours.
+      </p>
+
       <Routes>
         <Route path="/" element={<OffersList token={token} />} />
         <Route path="/new" element={<OfferForm token={token} />} />
