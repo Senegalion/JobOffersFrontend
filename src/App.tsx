@@ -5,8 +5,8 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import LoginForm from "./components/LoginForm";
-import RegisterForm from "./components/RegisterForm";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 import OffersPage from "./pages/OffersPage";
 import "./App.css";
 
@@ -43,11 +43,21 @@ const App: React.FC = () => {
           <Route
             path="/"
             element={
-              token ? <Navigate to="/offers" /> : <Navigate to="/login" />
+              token ? (
+                <Navigate to="/offers" />
+              ) : (
+                <div>
+                  <h2>Welcome! Please login or register.</h2>
+                  <div>
+                    <a href="/login">Login</a> |{" "}
+                    <a href="/register">Register</a>
+                  </div>
+                </div>
+              )
             }
           />
-          <Route path="/login" element={<LoginForm setToken={handleLogin} />} />
-          <Route path="/register" element={<RegisterForm />} />
+          <Route path="/login" element={<LoginPage setToken={handleLogin} />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route
             path="/offers/*"
             element={
